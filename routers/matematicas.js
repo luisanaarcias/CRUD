@@ -62,6 +62,18 @@ routerMatematicas.put('/:id', (req, res) => {
     res.send(JSON.stringify(matematicas));
 })
 
+routerMatematicas.patch('/:id', (req, res) => {
+    const infoActualizada= req.body;
+    const id = req.params.id;
+
+    const indice = matematicas.findIndex(curso => curso.id == id);
+    if (indice >= 0) {
+        const cursoModificar = matematicas[indice];
+        Object.assign(cursoModificar, infoActualizada);
+    }
+    res.send(JSON.stringify(matematicas));
+})
+
 //solicitudes DELETE
 routerMatematicas.delete('/:id', (req, res) => {
     const id = req.params.id;

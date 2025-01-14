@@ -62,12 +62,23 @@ routerProgramacion.put('/:id', (req, res) => {
 
 //solicitudes DELETE
 routerProgramacion.delete('/:id', (req, res) => {
-    console.log('hola')
     const id = req.params.id;
     const indice = programacion.findIndex(curso => curso.id == id);
 
     if (indice >= 0) {
         programacion.splice(indice, 1);
+    }
+    res.send(JSON.stringify(programacion));
+})
+
+routerProgramacion.patch('/:id', (req, res) => {
+    const infoActualizada= req.body;
+    const id = req.params.id;
+
+    const indice = programacion.findIndex(curso => curso.id == id);
+    if (indice >= 0) {
+        const cursoModificar = programacion[indice];
+        Object.assign(cursoModificar, infoActualizada);
     }
     res.send(JSON.stringify(programacion));
 })
